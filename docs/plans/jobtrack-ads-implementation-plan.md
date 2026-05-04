@@ -284,17 +284,27 @@ Objective: preparar persistência com migrations.
 Files:
 - Create: `docker-compose.yml`
 - Create: `.env.example`
+- Create: `apps/api/prisma.config.ts`
 - Create: `apps/api/prisma/schema.prisma`
+- Create: `apps/api/prisma/seed.ts`
+- Create: `apps/api/prisma/migrations/*/migration.sql`
 
 Steps:
 1. Adicionar PostgreSQL ao Docker Compose.
 2. Documentar `DATABASE_URL` em `.env.example`.
-3. Criar model `JobApplication` no Prisma.
-4. Rodar migration local.
+3. Configurar Prisma 7 com `prisma.config.ts`, datasource no config e driver adapter no runtime.
+4. Criar model `JobApplication` no Prisma.
+5. Rodar migration local.
+6. Rodar seed com dados fictícios.
+7. Atualizar CI para gerar client, aplicar migrations e rodar testes de integração.
 
 Verification:
-- `docker compose up -d db`
-- `npx prisma migrate dev -w apps/api` ou comando equivalente documentado.
+- `cp .env.example .env`
+- `npm run db:up`
+- `npm run db:validate`
+- `npm run db:generate`
+- `npm run db:migrate -w apps/api -- --name init`
+- `npm run db:seed -w apps/api`
 
 Commit:
 - `feat(api): add prisma postgres schema`
@@ -305,11 +315,16 @@ Objective: isolar acesso a dados.
 
 Files:
 - Create: `apps/api/src/modules/applications/application.repository.ts`
-- Test: `apps/api/src/modules/applications/application.repository.test.ts`
+- Test: `apps/api/src/modules/applications/application.repository.integration.test.ts`
 
 Testing approach:
-- Preferir teste de integração com banco de teste quando setup estiver pronto.
-- Se ficar pesado no MVP, testar service com repository fake e cobrir Prisma indiretamente via endpoints.
+- Teste de integração com PostgreSQL local via Docker Compose.
+- O teste usa `createApplicationRepository()` com Prisma real, limpa `job_applications` antes/depois e cobre create/list com filtros de domínio.
+- Testes de integração ficam fora de `npm test` e rodam por `npm run test:integration` para não exigir banco em todo feedback rápido.
+
+Verification:
+- `npm run db:deploy -w apps/api`
+- `npm run test:integration -w apps/api`
 
 Commit:
 - `feat(api): add application repository`

@@ -2,7 +2,7 @@
 
 Tracker de candidaturas para estudantes de ADS/TI organizarem oportunidades de estágio/júnior por status, stack, modalidade e próximas ações.
 
-Status: Milestones 0–2 concluídos. A base técnica, validação de candidaturas, filtros puros e regras de dashboard já estão implementados e testados. O MVP ainda não tem banco, API CRUD nem fluxo completo no front.
+Status: Milestones 0–3 concluídos. A base técnica, validação de domínio, filtros, dashboard, PostgreSQL/Prisma, migration inicial, seed fictício e repository de candidaturas já estão implementados e testados. O MVP ainda não tem rotas CRUD nem fluxo completo no front.
 
 ## Por que este projeto existe
 
@@ -25,14 +25,17 @@ Implementado até agora:
 - Tipos de domínio para status, modalidade e candidatura.
 - Filtros puros por status, modalidade, stack e texto.
 - Regras puras de dashboard para contagem por status, próximas ações e stacks frequentes.
+- PostgreSQL local via Docker Compose.
+- Prisma 7 com driver adapter PostgreSQL, schema, migration inicial e seed fictício.
+- Repository de candidaturas com testes de integração.
 - Front React/Vite inicial com landing do projeto.
-- CI com typecheck, testes e build.
+- CI com typecheck, testes unitários, migrations, testes de integração e build.
 
 Ainda falta para fechar o MVP:
-- PostgreSQL + Prisma.
-- API CRUD de candidaturas.
+- Rotas REST CRUD de candidaturas.
+- Rotas de dashboard.
 - Integração do front com a API.
-- Seed fictício e demo.
+- Demo pública com dados fictícios.
 
 ## Stack planejada
 
@@ -59,11 +62,26 @@ A futura demo pública deve usar dados fictícios. Não insira dados pessoais ou
 
 Secrets devem ficar em `.env`, nunca no repositório. O projeto manterá `.env.example` quando houver variáveis de ambiente.
 
-## Como validar a base atual
+## Como rodar localmente
 
 ```bash
 npm install
+cp .env.example .env
+npm run db:up
+npm run db:generate
+npm run db:deploy -w apps/api
+npm run db:seed -w apps/api
+```
+
+A API usa `DATABASE_URL` definida no `.env`. O banco local expõe PostgreSQL em `localhost:5433` para evitar conflito com instalações locais na porta padrão `5432`.
+
+## Como validar a base atual
+
+```bash
+npm run db:generate
+npm run db:deploy -w apps/api
 npm run typecheck
 npm test
+npm run test:integration
 npm run build
 ```

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { createApplicationSchema } from './application.schema.js';
+import { createApplicationSchema, updateApplicationSchema } from './application.schema.js';
 
 describe('createApplicationSchema', () => {
   it('accepts a valid company and role with safe defaults', () => {
@@ -56,6 +56,46 @@ describe('createApplicationSchema', () => {
       role: 'Estágio em Desenvolvimento Web',
       notes: 'a'.repeat(2001),
     });
+
+    expect(result.success).toBe(false);
+  });
+});
+
+describe('updateApplicationSchema', () => {
+  it('accepts partial updates without applying create defaults', () => {
+    const result = updateApplicationSchema.safeParse({
+      status: 'interview',
+      notes: 'Entrevista técnica marcada.',
+    });
+
+    expect(result.success).toBe(true);
+
+    if (result.success) {
+      expect(result.data).toEqual({
+        status: 'interview',
+        notes: 'Entrevista técnica marcada.',
+      });
+    }
+  });
+
+  it('converts empty clearable fields to null', () => {
+    const result = updateApplicationSchema.safeParse({
+      notes: '',
+      nextActionDate: '',
+    });
+
+    expect(result.success).toBe(true);
+
+    if (result.success) {
+      expect(result.data).toEqual({
+        notes: null,
+        nextActionDate: null,
+      });
+    }
+  });
+
+  it('rejects empty update payloads', () => {
+    const result = updateApplicationSchema.safeParse({});
 
     expect(result.success).toBe(false);
   });

@@ -22,12 +22,28 @@ const emptyStringToUndefined = (value: unknown) => {
   return value;
 };
 
+const emptyStringToNull = (value: unknown) => {
+  if (typeof value === 'string' && value.trim() === '') {
+    return null;
+  }
+
+  return value;
+};
+
 const optionalText = (maxLength: number) =>
   z.preprocess(emptyStringToUndefined, z.string().trim().max(maxLength).optional());
+
+const clearableText = (maxLength: number) =>
+  z.preprocess(emptyStringToNull, z.string().trim().max(maxLength).nullable().optional());
 
 const optionalUrl = z.preprocess(
   emptyStringToUndefined,
   z.string().trim().url().max(500).optional(),
+);
+
+const clearableUrl = z.preprocess(
+  emptyStringToNull,
+  z.string().trim().url().max(500).nullable().optional(),
 );
 
 const isValidIsoDate = (value: string) => {
@@ -50,10 +66,13 @@ const isValidIsoDate = (value: string) => {
   );
 };
 
-const optionalIsoDate = z.preprocess(
-  emptyStringToUndefined,
-  z.string().refine(isValidIsoDate, 'Expected a valid ISO date in YYYY-MM-DD format').optional(),
-);
+export const isoDateStringSchema = z
+  .string()
+  .refine(isValidIsoDate, 'Expected a valid ISO date in YYYY-MM-DD format');
+
+const optionalIsoDate = z.preprocess(emptyStringToUndefined, isoDateStringSchema.optional());
+
+const clearableIsoDate = z.preprocess(emptyStringToNull, isoDateStringSchema.nullable().optional());
 
 const stackSchema = z.string().trim().min(1).max(40);
 
@@ -71,6 +90,22 @@ export const createApplicationSchema = z.object({
   notes: optionalText(2000),
 });
 
+export const updateApplicationSchema = z
+  .object({
+    company: z.string().trim().min(2).max(120).optional(),
+    role: z.string().trim().min(2).max(160).optional(),
+    jobUrl: clearableUrl,
+    source: clearableText(80),
+    location: clearableText(120),
+    workMode: workModeSchema.optional(),
+    status: applicationStatusSchema.optional(),
+    dateApplied: clearableIsoDate,
+    nextActionDate: clearableIsoDate,
+    stacks: z.array(stackSchema).max(12).optional(),
+    notes: clearableText(2000),
+  })
+  .refine((value) => Object.keys(value).length > 0, 'Expected at least one field to update');
+
 export const jobApplicationSchema = createApplicationSchema.extend({
   id: z.string().uuid(),
   createdAt: z.string().datetime(),
@@ -81,4 +116,6 @@ export type ApplicationStatus = z.infer<typeof applicationStatusSchema>;
 export type WorkMode = z.infer<typeof workModeSchema>;
 export type CreateApplicationInput = z.input<typeof createApplicationSchema>;
 export type CreateApplicationData = z.output<typeof createApplicationSchema>;
+export type UpdateApplicationInput = z.input<typeof updateApplicationSchema>;
+export type UpdateApplicationData = z.output<typeof updateApplicationSchema>;
 export type JobApplication = z.infer<typeof jobApplicationSchema>;

@@ -2,7 +2,7 @@
 
 Tracker de candidaturas para estudantes de ADS/TI organizarem oportunidades de estágio/júnior por status, stack, modalidade e próximas ações.
 
-Status: Milestones 0–3 concluídos. A base técnica, validação de domínio, filtros, dashboard, PostgreSQL/Prisma, migration inicial, seed fictício e repository de candidaturas já estão implementados e testados. O MVP ainda não tem rotas CRUD nem fluxo completo no front.
+Status: Milestones 0–4 concluídos. A base técnica, validação de domínio, filtros, dashboard, PostgreSQL/Prisma, migration inicial, seed fictício, repository e rotas REST CRUD já estão implementados e testados. O MVP ainda não tem integração completa no front.
 
 ## Por que este projeto existe
 
@@ -28,13 +28,14 @@ Implementado até agora:
 - PostgreSQL local via Docker Compose.
 - Prisma 7 com driver adapter PostgreSQL, schema, migration inicial e seed fictício.
 - Repository de candidaturas com testes de integração.
+- Rotas REST para candidaturas: `POST`, `GET`, `GET /:id`, `PATCH` e `DELETE`.
+- Rota `GET /dashboard/summary` usando as regras puras de dashboard.
 - Front React/Vite inicial com landing do projeto.
 - CI com typecheck, testes unitários, migrations, testes de integração e build.
 
 Ainda falta para fechar o MVP:
-- Rotas REST CRUD de candidaturas.
-- Rotas de dashboard.
 - Integração do front com a API.
+- UI de listagem, filtros, formulário e dashboard.
 - Demo pública com dados fictícios.
 
 ## Stack planejada
@@ -74,6 +75,20 @@ npm run db:seed -w apps/api
 ```
 
 A API usa `DATABASE_URL` definida no `.env`. O banco local expõe PostgreSQL em `localhost:5433` para evitar conflito com instalações locais na porta padrão `5432`.
+
+## API atual
+
+Com o servidor rodando, a API expõe:
+
+- `GET /health`
+- `POST /applications`
+- `GET /applications?status=&workMode=&stack=&search=`
+- `GET /applications/:id`
+- `PATCH /applications/:id`
+- `DELETE /applications/:id`
+- `GET /dashboard/summary?today=YYYY-MM-DD`
+
+Payloads de criação/edição são validados com Zod. `DELETE` remove a candidatura; para apenas ocultar uma candidatura, use `PATCH` alterando `status` para `archived`.
 
 ## Como validar a base atual
 

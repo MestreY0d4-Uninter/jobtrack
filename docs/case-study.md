@@ -43,7 +43,7 @@ Fora do MVP:
 
 ## Qualidade
 
-- Testes para validação, filtros, repository, endpoints e dashboard.
+- Testes para validação, filtros, repository, endpoints REST e dashboard.
 - README com setup e comandos.
 - ADRs para decisões principais.
 - Checklist de revisão para código gerado com IA.
@@ -56,18 +56,19 @@ Fora do MVP:
 
 ## Progresso atual
 
-- Milestones 0–3 concluídos no repositório local.
+- Milestones 0–4 concluídos no repositório local.
 - Base técnica criada com monorepo npm, API Fastify, front React/Vite e CI.
 - Domínio inicial coberto por testes: schema Zod de candidatura, filtros puros e regras de dashboard.
 - Persistência configurada com PostgreSQL local, Prisma 7, migration inicial e seed fictício.
 - Repository de candidaturas coberto por teste de integração com banco real.
-- Próximo bloco técnico: rotas REST CRUD usando o repository já validado.
+- Rotas REST de candidaturas implementadas: criar, listar/filtrar, detalhar, editar e excluir.
+- Rota `GET /dashboard/summary` implementada usando as regras puras de dashboard.
+- Próximo bloco técnico: integração do front com a API.
 
 ## Próximos passos
 
-- Rotas REST CRUD de candidaturas.
-- Rotas de dashboard.
 - Integração do front com a API.
+- UI de listagem, filtros, formulário e dashboard.
 - Demo pública com seed fictício.
 - Import/export CSV.
 - Autenticação para uso pessoal privado após o MVP.

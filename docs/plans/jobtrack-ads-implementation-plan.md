@@ -319,7 +319,7 @@ Files:
 
 Testing approach:
 - Teste de integração com PostgreSQL local via Docker Compose.
-- O teste usa `createApplicationRepository()` com Prisma real, limpa `job_applications` antes/depois e cobre create/list com filtros de domínio.
+- O teste usa `createApplicationRepository()` com Prisma real, limpa `job_applications` antes/depois e cobre create/list/filtros/find/update/delete, além de smoke de rotas contra PostgreSQL real.
 - Testes de integração ficam fora de `npm test` e rodam por `npm run test:integration` para não exigir banco em todo feedback rápido.
 
 Verification:
@@ -329,7 +329,32 @@ Verification:
 Commit:
 - `feat(api): add application repository`
 
-## Milestone 4 — API de candidaturas
+## Milestone 4 — API de candidaturas e dashboard
+
+Status: concluído. Implementação real agrupada no commit `feat(api): add application rest routes`.
+
+Arquivos implementados:
+- `apps/api/src/modules/applications/application.routes.ts`
+- `apps/api/src/modules/applications/application.routes.test.ts`
+- `apps/api/src/modules/dashboard/dashboard.routes.ts`
+- `apps/api/src/modules/applications/application.repository.ts`
+- `apps/api/src/modules/applications/application.repository.integration.test.ts`
+- `apps/api/src/app.ts`
+- `apps/api/src/server.ts`
+
+Endpoints entregues:
+- `POST /applications`
+- `GET /applications?status=&workMode=&stack=&search=`
+- `GET /applications/:id`
+- `PATCH /applications/:id`
+- `DELETE /applications/:id`
+- `GET /dashboard/summary?today=YYYY-MM-DD`
+
+Validação aplicada:
+- Testes de rota com `fastify.inject()` e repository em memória.
+- Teste de integração com PostgreSQL real cobrindo CRUD e dashboard.
+- `PATCH` usa `updateApplicationSchema` separado para evitar defaults de criação em atualização.
+- Campos opcionais clearable (`notes`, datas, URL e textos opcionais) aceitam string vazia como limpeza.
 
 ### Task 4.1: POST /applications
 
@@ -412,6 +437,8 @@ Commit:
 - `feat(api): delete applications`
 
 ## Milestone 5 — Dashboard API
+
+Status: antecipado no Milestone 4. A rota `GET /dashboard/summary` já usa `buildDashboardSummary()` diretamente; não foi criado `dashboard.service.ts` separado porque a função pura existente já cumpre esse papel sem adicionar camada vazia.
 
 ### Task 5.1: Criar summary service
 

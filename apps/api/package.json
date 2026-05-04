@@ -7,15 +7,30 @@
     "dev": "tsx watch src/server.ts",
     "start": "node dist/server.js",
     "build": "tsc -p tsconfig.build.json",
-    "test": "vitest run --exclude 'dist/**'",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "test": "vitest run --exclude 'dist/**' --exclude '**/*.integration.test.ts'",
+    "test:integration": "vitest run --exclude 'dist/**' '**/*.integration.test.ts'",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.scripts.json --noEmit",
+    "db:generate": "prisma generate --config prisma.config.ts",
+    "db:migrate": "prisma migrate dev --config prisma.config.ts",
+    "db:deploy": "prisma migrate deploy --config prisma.config.ts",
+    "db:seed": "prisma db seed --config prisma.config.ts",
+    "db:validate": "prisma validate --config prisma.config.ts"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
+    "@prisma/adapter-pg": "^7.8.0",
+    "@prisma/client": "^7.8.0",
     "fastify": "^5.6.2",
+    "pg": "^8.20.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/node": "^24.10.1",
+    "@types/pg": "^8.20.0",
+    "dotenv": "^17.4.2",
+    "prisma": "^7.8.0",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",
     "vitest": "^4.0.14"

@@ -45,9 +45,8 @@ Secrets devem ficar em `.env`, nunca no repositório. O projeto manterá `.env.e
 ## Como validar a base atual
 
 ```bash
-npm test
+npm install
 npm run typecheck
+npm test
 npm run build
 ```
-
-Esses comandos serão ativados durante o setup técnico do Milestone 1.

@@ -2,7 +2,7 @@
 
 Tracker de candidaturas para estudantes de ADS/TI organizarem oportunidades de estágio/júnior por status, stack, modalidade e próximas ações.
 
-Status: Milestones 0–4 concluídos. A base técnica, validação de domínio, filtros, dashboard, PostgreSQL/Prisma, migration inicial, seed fictício, repository e rotas REST CRUD já estão implementados e testados. O MVP ainda não tem integração completa no front.
+Status: Milestones 0–6 concluídos. A base técnica, validação de domínio, filtros, dashboard, PostgreSQL/Prisma, migration inicial, seed fictício, repository, rotas REST CRUD e front-end MVP integrado à API já estão implementados e testados. A demo pública ainda está pendente.
 
 ## Por que este projeto existe
 
@@ -30,13 +30,13 @@ Implementado até agora:
 - Repository de candidaturas com testes de integração.
 - Rotas REST para candidaturas: `POST`, `GET`, `GET /:id`, `PATCH` e `DELETE`.
 - Rota `GET /dashboard/summary` usando as regras puras de dashboard.
-- Front React/Vite inicial com landing do projeto.
+- Front React/Vite com dashboard, filtros, listagem e formulário de criação/edição integrado à API.
 - CI com typecheck, testes unitários, migrations, testes de integração e build.
 
-Ainda falta para fechar o MVP:
-- Integração do front com a API.
-- UI de listagem, filtros, formulário e dashboard.
+Ainda falta para publicar como projeto de portfólio:
 - Demo pública com dados fictícios.
+- Screenshot/GIF do fluxo principal.
+- Revisão final de README/case study antes de fixar no GitHub.
 
 ## Stack planejada
 
@@ -75,6 +75,15 @@ npm run db:seed -w apps/api
 ```
 
 A API usa `DATABASE_URL` definida no `.env`. O banco local expõe PostgreSQL em `localhost:5433` para evitar conflito com instalações locais na porta padrão `5432`.
+
+Para usar o front integrado à API em desenvolvimento, rode em dois terminais:
+
+```bash
+npm run dev -w apps/api
+npm run dev -w apps/web
+```
+
+O Vite usa proxy de `/api` para `http://localhost:3333` por padrão. Se a API estiver em outro endereço, ajuste `VITE_API_BASE_URL` no `.env`.
 
 ## API atual
 

@@ -470,6 +470,26 @@ Commit:
 
 ## Milestone 6 — Front-end MVP
 
+Status: concluído. Implementação real agrupada no commit `feat(web): add frontend mvp`.
+
+Arquivos implementados:
+- `apps/web/src/api/client.ts`
+- `apps/web/src/features/applications/application.types.ts`
+- `apps/web/src/features/applications/applicationFilters.ts`
+- `apps/web/src/features/applications/ApplicationForm.tsx`
+- `apps/web/src/features/applications/ApplicationList.tsx`
+- `apps/web/src/features/dashboard/Dashboard.tsx`
+- `apps/web/src/App.tsx`
+- testes de client, filtros, componentes e smoke do app em `apps/web/src/**/*.test.*`
+
+Entregue:
+- API client centralizado com `VITE_API_BASE_URL` e proxy `/api` no Vite.
+- Listagem de candidaturas com estado vazio, tags, status, modalidade e ações.
+- Formulário de criação/edição com validação cliente mínima e normalização de stacks.
+- Filtros visíveis por status, modalidade, stack e busca textual.
+- Dashboard com total, contagem por status, próximas ações e stacks frequentes.
+- Testes de front com Vitest, jsdom e Testing Library.
+
 ### Task 6.1: Criar API client
 
 Objective: centralizar chamadas HTTP.

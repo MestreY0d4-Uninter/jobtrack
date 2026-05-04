@@ -8,7 +8,7 @@
     "start": "node dist/server.js",
     "build": "tsc -p tsconfig.build.json",
     "test": "vitest run --exclude 'dist/**' --exclude '**/*.integration.test.ts'",
-    "test:integration": "vitest run --exclude 'dist/**' '**/*.integration.test.ts'",
+    "test:integration": "vitest run --exclude 'dist/**' integration.test",
     "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.scripts.json --noEmit",
     "db:generate": "prisma generate --config prisma.config.ts",
     "db:migrate": "prisma migrate dev --config prisma.config.ts",

@@ -79,5 +79,6 @@ export const jobApplicationSchema = createApplicationSchema.extend({
 
 export type ApplicationStatus = z.infer<typeof applicationStatusSchema>;
 export type WorkMode = z.infer<typeof workModeSchema>;
-export type CreateApplicationInput = z.infer<typeof createApplicationSchema>;
+export type CreateApplicationInput = z.input<typeof createApplicationSchema>;
+export type CreateApplicationData = z.output<typeof createApplicationSchema>;
 export type JobApplication = z.infer<typeof jobApplicationSchema>;

@@ -256,6 +256,25 @@ TDD cases:
 Commit:
 - `feat(api): add application filtering rules`
 
+### Task 2.3: Criar regras puras de dashboard
+
+Objective: calcular métricas sem depender de banco, rota ou UI.
+
+Files:
+- Create: `apps/api/src/modules/dashboard/dashboard.summary.ts`
+- Test: `apps/api/src/modules/dashboard/dashboard.summary.test.ts`
+
+TDD cases:
+- conta candidaturas por status e mantém zero nos status ausentes.
+- retorna próximas ações vencidas ou nos próximos 7 dias, ordenadas por data.
+- conta stacks frequentes de forma case-insensitive.
+
+Run:
+- `npm test -w apps/api -- dashboard.summary.test.ts`
+
+Commit:
+- `feat(api): add dashboard summary rules`
+
 ## Milestone 3 — Banco e repositório
 
 ### Task 3.1: Adicionar PostgreSQL local e Prisma

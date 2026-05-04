@@ -2,7 +2,7 @@
 
 Tracker de candidaturas para estudantes de ADS/TI organizarem oportunidades de estágio/júnior por status, stack, modalidade e próximas ações.
 
-Status: base inicial em construção. O MVP ainda não está pronto.
+Status: Milestones 0–2 concluídos. A base técnica, validação de candidaturas, filtros puros e regras de dashboard já estão implementados e testados. O MVP ainda não tem banco, API CRUD nem fluxo completo no front.
 
 ## Por que este projeto existe
 
@@ -16,6 +16,23 @@ Durante a busca por estágio, é fácil perder links, datas, requisitos e status
 - Acompanhar próxima ação/follow-up.
 - Dashboard com contagem por status, próximas ações e stacks frequentes.
 - Seed com dados fictícios para demonstração.
+
+## Estado atual
+
+Implementado até agora:
+- API Fastify com `GET /health`.
+- Schemas Zod para entrada de candidaturas.
+- Tipos de domínio para status, modalidade e candidatura.
+- Filtros puros por status, modalidade, stack e texto.
+- Regras puras de dashboard para contagem por status, próximas ações e stacks frequentes.
+- Front React/Vite inicial com landing do projeto.
+- CI com typecheck, testes e build.
+
+Ainda falta para fechar o MVP:
+- PostgreSQL + Prisma.
+- API CRUD de candidaturas.
+- Integração do front com a API.
+- Seed fictício e demo.
 
 ## Stack planejada
 

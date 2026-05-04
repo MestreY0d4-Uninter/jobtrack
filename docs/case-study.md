@@ -54,9 +54,20 @@ Fora do MVP:
 - Sem autenticação no MVP.
 - Sem notificações reais.
 
+## Progresso atual
+
+- Milestones 0–2 concluídos no repositório local.
+- Base técnica criada com monorepo npm, API Fastify, front React/Vite e CI.
+- Domínio inicial coberto por testes: schema Zod de candidatura, filtros puros e regras de dashboard.
+- Próximo bloco técnico: persistência com PostgreSQL + Prisma antes da API CRUD.
+
 ## Próximos passos
 
-- Autenticação para uso pessoal privado.
+- PostgreSQL + Prisma com migration inicial.
+- API CRUD de candidaturas.
+- Integração do front com a API.
+- Seed fictício e demo pública.
 - Import/export CSV.
+- Autenticação para uso pessoal privado após o MVP.
 - Kanban visual.
 - Análise de vagas com IA, mantendo validação humana.

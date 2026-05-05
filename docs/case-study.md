@@ -16,7 +16,7 @@ Planilhas ajudam, mas ficam bagunçadas quando há muitas vagas. Eu precisava de
 
 ## Solução
 
-Criei o JobTrack ADS, uma aplicação full-stack para organizar candidaturas em um pipeline simples com filtros, próximas ações e dashboard.
+Criei o JobTrack ADS, uma aplicação full-stack para organizar candidaturas em um pipeline simples com filtros, próximas ações e dashboard. Além do fluxo integrado à API, o projeto tem uma demo estática com dados fictícios para facilitar avaliação rápida por recrutadores e visitantes do GitHub.
 
 ## Escopo do MVP
 
@@ -27,6 +27,8 @@ Incluído:
 - Dashboard simples.
 - Testes e CI.
 - Dados fictícios para demo.
+- Modo demo front-only sem backend/PostgreSQL.
+- Screenshot validado para README e apresentação.
 
 Fora do MVP:
 - Login.
@@ -40,19 +42,22 @@ Fora do MVP:
 - Fastify para API testável via `fastify.inject()`.
 - PostgreSQL + Prisma para demonstrar SQL/migrations.
 - Vitest e CI para manter feedback rápido.
+- Client demo em memória selecionado por `VITE_DEMO_MODE=true`, mantendo o client real como padrão e evitando dependência de banco para avaliação visual.
 
 ## Qualidade
 
-- Testes para validação, filtros, repository, endpoints REST, dashboard e componentes principais do front.
-- README com setup e comandos.
+- Testes para validação, filtros, repository, endpoints REST, dashboard, client demo e componentes principais do front.
+- README com setup, comandos e modo demo estático.
 - ADRs para decisões principais.
+- Screenshot versionado em `docs/assets/`.
 - Checklist de revisão para código gerado com IA.
 
 ## Limitações
 
-- A demo pública deverá usar dados fictícios.
+- A demo pública deve continuar usando apenas dados fictícios.
 - Sem autenticação no MVP.
 - Sem notificações reais.
+- A demo estática roda no navegador e não persiste dados após recarregar a página.
 
 ## Progresso atual
 
@@ -64,12 +69,13 @@ Fora do MVP:
 - Rotas REST de candidaturas implementadas: criar, listar/filtrar, detalhar, editar e excluir.
 - Rota `GET /dashboard/summary` implementada usando as regras puras de dashboard.
 - Front-end MVP integrado à API com dashboard, filtros, listagem, criação, edição e exclusão.
-- Próximo bloco técnico: demo pública com dados fictícios e screenshot/GIF para apresentação.
+- Modo demo front-only implementado com dados fictícios em memória.
+- Screenshot de apresentação versionado em `docs/assets/jobtrack-ads-demo-overview.png`.
+- Próximo bloco técnico: validação final, publicação da demo em URL estável e revisão antes de fixar no GitHub.
 
 ## Próximos passos
 
-- Demo pública com seed fictício.
-- Screenshot/GIF do fluxo principal.
+- Publicar a demo estática em uma URL estável.
 - Revisão final de README/case study antes de fixar no GitHub.
 - Import/export CSV.
 - Autenticação para uso pessoal privado após o MVP.

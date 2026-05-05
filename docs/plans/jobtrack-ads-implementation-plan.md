@@ -29,6 +29,9 @@ jobtrack-ads/
   package.json
   docker-compose.yml
   docs/
+    assets/
+      jobtrack-ads-demo-overview.png
+      jobtrack-ads-demo-dashboard.png
     adrs/
       ADR-001-fullstack-typescript.md
       ADR-002-postgresql-prisma.md
@@ -569,6 +572,8 @@ Commit:
 
 ## Milestone 7 — Seed, documentação e polish
 
+Status: em andamento. Seed fictício já existe na API, modo demo front-only foi criado com `VITE_DEMO_MODE=true`, screenshots foram versionados em `docs/assets/`, e README/case study estão sendo atualizados para apresentação de portfólio.
+
 ### Task 7.1: Seed fictício
 
 Objective: facilitar demo e screenshots sem dados reais.
@@ -589,7 +594,7 @@ Objective: transformar repo em portfólio legível.
 
 README must include:
 - Problema.
-- Demo.
+- Demo estática com `VITE_DEMO_MODE=true`.
 - Screenshot/GIF.
 - Stack.
 - Funcionalidades.
@@ -600,6 +605,11 @@ README must include:
 - Segurança/privacidade.
 - Uso responsável de IA.
 - Roadmap.
+
+Status atual:
+- Preview do dashboard versionado em `docs/assets/jobtrack-ads-demo-overview.png`.
+- Captura full-page versionada em `docs/assets/jobtrack-ads-demo-dashboard.png`.
+- Demo local documentada sem depender de API/PostgreSQL.
 
 Commit:
 - `docs: expand project readme`
@@ -617,6 +627,7 @@ Sections:
 - Escopo MVP.
 - Decisões técnicas.
 - Testes/validação.
+- Demo estática e screenshots.
 - Limitações.
 - Próximos passos.
 

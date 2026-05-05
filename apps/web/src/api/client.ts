@@ -11,6 +11,14 @@ type ApiClientOptions = {
   fetchFn?: typeof fetch;
 };
 
+export type JobTrackApi = {
+  listApplications(filters: ApplicationFilterState): Promise<JobApplication[]>;
+  getDashboardSummary(): Promise<DashboardSummary>;
+  createApplication(payload: CreateApplicationPayload): Promise<JobApplication>;
+  updateApplication(id: string, payload: UpdateApplicationPayload): Promise<JobApplication>;
+  deleteApplication(id: string): Promise<void>;
+};
+
 type ApiIssue = {
   path?: string;
   message?: string;
@@ -62,7 +70,7 @@ const getErrorMessage = async (response: Response) => {
   return `Erro HTTP ${response.status}`;
 };
 
-export function createJobTrackApiClient(options: ApiClientOptions = {}) {
+export function createJobTrackApiClient(options: ApiClientOptions = {}): JobTrackApi {
   const baseUrl = normalizeBaseUrl(options.baseUrl ?? defaultBaseUrl);
   const fetchImpl = options.fetchFn;
 

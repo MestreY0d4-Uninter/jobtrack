@@ -2,7 +2,13 @@
 
 Tracker de candidaturas para estudantes de ADS/TI organizarem oportunidades de estágio/júnior por status, stack, modalidade e próximas ações.
 
-Status: Milestones 0–6 concluídos. A base técnica, validação de domínio, filtros, dashboard, PostgreSQL/Prisma, migration inicial, seed fictício, repository, rotas REST CRUD e front-end MVP integrado à API já estão implementados e testados. A demo pública ainda está pendente.
+Status: Milestones 0–6 concluídos e demo estática local disponível. A base técnica, validação de domínio, filtros, dashboard, PostgreSQL/Prisma, migration inicial, seed fictício, repository, rotas REST CRUD, front-end MVP integrado à API e modo demo com dados fictícios já estão implementados e testados.
+
+## Preview da demo
+
+![Preview do dashboard do JobTrack ADS](docs/assets/jobtrack-ads-demo-overview.png)
+
+A imagem acima mostra a demo estática com dados fictícios rodando só no navegador, sem backend nem banco. A captura full-page também está versionada em `docs/assets/jobtrack-ads-demo-dashboard.png`.
 
 ## Por que este projeto existe
 
@@ -31,11 +37,12 @@ Implementado até agora:
 - Rotas REST para candidaturas: `POST`, `GET`, `GET /:id`, `PATCH` e `DELETE`.
 - Rota `GET /dashboard/summary` usando as regras puras de dashboard.
 - Front React/Vite com dashboard, filtros, listagem e formulário de criação/edição integrado à API.
+- Modo demo estático (`VITE_DEMO_MODE=true`) com dados fictícios no navegador, sem exigir API/PostgreSQL.
+- Screenshot validado para README e apresentação do portfólio.
 - CI com typecheck, testes unitários, migrations, testes de integração e build.
 
 Ainda falta para publicar como projeto de portfólio:
-- Demo pública com dados fictícios.
-- Screenshot/GIF do fluxo principal.
+- Publicar a demo em uma URL estável.
 - Revisão final de README/case study antes de fixar no GitHub.
 
 ## Stack planejada
@@ -57,11 +64,33 @@ Ainda falta para publicar como projeto de portfólio:
 - [ADR-003 — Estratégia de testes](docs/adrs/ADR-003-testing-strategy.md)
 - [ADR-004 — Uso responsável de IA](docs/adrs/ADR-004-ai-usage-policy.md)
 
+## Uso responsável de IA
+
+IA pode apoiar pesquisa, planejamento, revisão e geração de código, mas o código só entra no projeto depois de passar por entendimento humano, testes, typecheck, revisão de segurança básica e validação contra o escopo do MVP.
+
 ## Segurança e privacidade
 
-A futura demo pública deve usar dados fictícios. Não insira dados pessoais ou sensíveis em ambiente público.
+A demo usa apenas dados fictícios. Não insira dados pessoais ou sensíveis em ambiente público.
 
-Secrets devem ficar em `.env`, nunca no repositório. O projeto manterá `.env.example` quando houver variáveis de ambiente.
+Secrets devem ficar em `.env`, nunca no repositório. O projeto mantém `.env.example` com placeholders para desenvolvimento local.
+
+## Como rodar a demo estática
+
+Para visualizar o front com dados fictícios, sem API, PostgreSQL ou `.env` real:
+
+```bash
+VITE_DEMO_MODE=true npm run dev -w apps/web
+```
+
+Para gerar um build estático da demo:
+
+```bash
+VITE_DEMO_MODE=true npm run build -w apps/web
+cd apps/web/dist
+python3 -m http.server 5173
+```
+
+Depois acesse `http://localhost:5173`.
 
 ## Como rodar localmente
 
@@ -83,7 +112,7 @@ npm run dev -w apps/api
 npm run dev -w apps/web
 ```
 
-O Vite usa proxy de `/api` para `http://localhost:3333` por padrão. Se a API estiver em outro endereço, ajuste `VITE_API_BASE_URL` no `.env`.
+O Vite usa proxy de `/api` para `http://localhost:3333` por padrão. Se a API estiver em outro endereço, ajuste `VITE_API_BASE_URL` no `.env`. Para usar a demo estática, defina `VITE_DEMO_MODE=true`; o padrão é `false`.
 
 ## API atual
 
@@ -98,6 +127,14 @@ Com o servidor rodando, a API expõe:
 - `GET /dashboard/summary?today=YYYY-MM-DD`
 
 Payloads de criação/edição são validados com Zod. `DELETE` remove a candidatura; para apenas ocultar uma candidatura, use `PATCH` alterando `status` para `archived`.
+
+## Roadmap
+
+- Publicar a demo estática em uma URL estável.
+- Revisar README/case study antes de fixar o repositório no GitHub profile.
+- Adicionar import/export CSV.
+- Avaliar autenticação para uso pessoal privado após o MVP.
+- Avaliar Kanban visual sem aumentar o escopo do MVP.
 
 ## Como validar a base atual
 

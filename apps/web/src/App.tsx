@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { jobTrackApi } from './api/client';
+import { jobTrackApi, type JobTrackApi } from './api';
 import { ApplicationForm } from './features/applications/ApplicationForm';
 import { ApplicationList } from './features/applications/ApplicationList';
 import {
@@ -22,7 +22,13 @@ import type { DashboardSummary } from './features/dashboard/dashboard.types';
 const getErrorMessage = (error: unknown) =>
   error instanceof Error ? error.message : 'Não foi possível completar a operação.';
 
-export function App() {
+type AppProps = {
+  api?: JobTrackApi;
+};
+
+const isDemoMode = import.meta.env.VITE_DEMO_MODE === 'true';
+
+export function App({ api = jobTrackApi }: AppProps) {
   const [applications, setApplications] = useState<JobApplication[]>([]);
   const [dashboardSummary, setDashboardSummary] = useState<DashboardSummary | null>(null);
   const [filters, setFilters] = useState<ApplicationFilterState>(emptyApplicationFilters);
@@ -36,8 +42,8 @@ export function App() {
 
     try {
       const [nextApplications, nextDashboardSummary] = await Promise.all([
-        jobTrackApi.listApplications(filters),
-        jobTrackApi.getDashboardSummary(),
+        api.listApplications(filters),
+        api.getDashboardSummary(),
       ]);
 
       setApplications(nextApplications);
@@ -48,7 +54,7 @@ export function App() {
     } finally {
       setIsLoading(false);
     }
-  }, [filters]);
+  }, [api, filters]);
 
   useEffect(() => {
     void loadData();
@@ -63,9 +69,9 @@ export function App() {
 
     try {
       if (editingApplication === null) {
-        await jobTrackApi.createApplication(payload);
+        await api.createApplication(payload);
       } else {
-        await jobTrackApi.updateApplication(editingApplication.id, payload);
+        await api.updateApplication(editingApplication.id, payload);
       }
 
       setEditingApplication(null);
@@ -84,7 +90,7 @@ export function App() {
     }
 
     try {
-      await jobTrackApi.deleteApplication(application.id);
+      await api.deleteApplication(application.id);
       await loadData();
     } catch (error) {
       setErrorMessage(getErrorMessage(error));
@@ -103,8 +109,12 @@ export function App() {
           </p>
         </div>
         <div className="header-card">
-          <strong>Fluxo validado</strong>
-          <span>React + Fastify + PostgreSQL + testes</span>
+          <strong>{isDemoMode ? 'Demo estática' : 'Fluxo validado'}</strong>
+          <span>
+            {isDemoMode
+              ? 'Dados fictícios no navegador, sem backend'
+              : 'React + Fastify + PostgreSQL + testes'}
+          </span>
         </div>
       </header>
 

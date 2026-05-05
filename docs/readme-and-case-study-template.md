@@ -48,8 +48,9 @@ Durante a busca por estágio, é fácil perder links, datas, requisitos e status
 cp .env.example .env
 docker compose up -d db
 npm install
-npm run db:migrate
-npm run db:seed
+npm run db:generate
+npm run db:deploy -w apps/api
+npm run db:seed -w apps/api
 npm run dev
 ```
 
@@ -68,7 +69,6 @@ npm run build
 - POST /applications
 - GET /applications/:id
 - PATCH /applications/:id
-- PATCH /applications/:id/status
 - DELETE /applications/:id
 - GET /dashboard/summary
 

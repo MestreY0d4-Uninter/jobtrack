@@ -415,9 +415,9 @@ TDD cases:
 Commit:
 - `feat(api): update application details`
 
-### Task 4.5: PATCH /applications/:id/status
+### Task 4.5: Atualizar status via PATCH /applications/:id
 
-Objective: alterar status.
+Objective: alterar status sem criar endpoint específico para uma única propriedade.
 
 TDD cases:
 - atualiza status válido.

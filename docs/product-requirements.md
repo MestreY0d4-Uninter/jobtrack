@@ -113,9 +113,10 @@ Campos:
 - `POST /applications`
 - `GET /applications/:id`
 - `PATCH /applications/:id`
-- `PATCH /applications/:id/status`
 - `DELETE /applications/:id`
 - `GET /dashboard/summary`
+
+A alteração de status usa `PATCH /applications/:id` com o campo `status`, evitando um endpoint separado só para status no MVP.
 
 ## Critérios de aceite globais
 

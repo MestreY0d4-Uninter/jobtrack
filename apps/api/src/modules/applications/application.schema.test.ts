@@ -50,6 +50,38 @@ describe('createApplicationSchema', () => {
     expect(result.success).toBe(false);
   });
 
+  it('rejects non-http job URL protocols', () => {
+    for (const jobUrl of ['javascript:alert(1)', 'data:text/html,<h1>x</h1>', 'ftp://example.com/vaga']) {
+      const result = createApplicationSchema.safeParse({
+        company: 'Tech Curitiba',
+        role: 'Estágio em Desenvolvimento Web',
+        jobUrl,
+      });
+
+      expect(result.success).toBe(false);
+    }
+  });
+
+  it('accepts http and https job URLs', () => {
+    for (const jobUrl of ['http://example.com/vaga', 'https://example.com/vaga']) {
+      const result = createApplicationSchema.safeParse({
+        company: 'Tech Curitiba',
+        role: 'Estágio em Desenvolvimento Web',
+        jobUrl,
+      });
+
+      expect(result.success).toBe(true);
+    }
+  });
+
+  it('rejects non-http job URL protocols on update', () => {
+    const result = updateApplicationSchema.safeParse({
+      jobUrl: 'javascript:alert(1)',
+    });
+
+    expect(result.success).toBe(false);
+  });
+
   it('rejects notes above 2000 characters', () => {
     const result = createApplicationSchema.safeParse({
       company: 'Tech Curitiba',

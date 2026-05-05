@@ -14,6 +14,20 @@ const optionalMeta = (label: string, value: string | undefined) =>
     </span>
   );
 
+const isHttpUrl = (value: string | undefined) => {
+  if (value === undefined || value === '') {
+    return false;
+  }
+
+  try {
+    const protocol = new URL(value).protocol;
+
+    return protocol === 'http:' || protocol === 'https:';
+  } catch {
+    return false;
+  }
+};
+
 export function ApplicationList({ applications, onDelete, onEdit }: ApplicationListProps) {
   if (applications.length === 0) {
     return (
@@ -60,7 +74,7 @@ export function ApplicationList({ applications, onDelete, onEdit }: ApplicationL
           ) : null}
 
           <div className="card-actions">
-            {application.jobUrl !== undefined && application.jobUrl !== '' ? (
+            {isHttpUrl(application.jobUrl) ? (
               <a href={application.jobUrl} rel="noreferrer" target="_blank">
                 Abrir vaga
               </a>

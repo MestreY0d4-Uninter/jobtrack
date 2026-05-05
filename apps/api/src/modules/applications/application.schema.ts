@@ -36,15 +36,26 @@ const optionalText = (maxLength: number) =>
 const clearableText = (maxLength: number) =>
   z.preprocess(emptyStringToNull, z.string().trim().max(maxLength).nullable().optional());
 
-const optionalUrl = z.preprocess(
-  emptyStringToUndefined,
-  z.string().trim().url().max(500).optional(),
-);
+const isHttpUrl = (value: string) => {
+  try {
+    const protocol = new URL(value).protocol;
 
-const clearableUrl = z.preprocess(
-  emptyStringToNull,
-  z.string().trim().url().max(500).nullable().optional(),
-);
+    return protocol === 'http:' || protocol === 'https:';
+  } catch {
+    return false;
+  }
+};
+
+const httpUrlSchema = z
+  .string()
+  .trim()
+  .url()
+  .max(500)
+  .refine(isHttpUrl, 'Expected an HTTP or HTTPS URL');
+
+const optionalUrl = z.preprocess(emptyStringToUndefined, httpUrlSchema.optional());
+
+const clearableUrl = z.preprocess(emptyStringToNull, httpUrlSchema.nullable().optional());
 
 const isValidIsoDate = (value: string) => {
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);

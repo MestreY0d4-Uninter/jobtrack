@@ -12,6 +12,7 @@ const applications: JobApplication[] = [
     workMode: 'remote',
     status: 'applied',
     stacks: ['React', 'TypeScript'],
+    jobUrl: 'https://example.com/jobs/frontend',
     nextActionDate: '2026-05-08',
     createdAt: '2026-05-04T10:00:00.000Z',
     updatedAt: '2026-05-04T10:00:00.000Z',
@@ -35,7 +36,22 @@ describe('ApplicationList', () => {
     expect(screen.getByText('React')).toBeTruthy();
     expect(screen.getByText('TypeScript')).toBeTruthy();
     expect(screen.getByText('Próxima ação: 2026-05-08')).toBeTruthy();
+    expect(screen.getByRole('link', { name: 'Abrir vaga' }).getAttribute('href')).toBe(
+      'https://example.com/jobs/frontend',
+    );
     expect(screen.getByRole('button', { name: 'Editar candidatura Acme Tech' })).toBeTruthy();
     expect(screen.getByRole('button', { name: 'Excluir candidatura Acme Tech' })).toBeTruthy();
+  });
+
+  it('does not render unsafe non-http job links', () => {
+    render(
+      <ApplicationList
+        applications={[{ ...applications[0]!, jobUrl: 'javascript:alert(1)' }]}
+        onDelete={vi.fn()}
+        onEdit={vi.fn()}
+      />,
+    );
+
+    expect(screen.queryByRole('link', { name: 'Abrir vaga' })).toBeNull();
   });
 });

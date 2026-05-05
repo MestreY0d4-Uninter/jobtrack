@@ -4,14 +4,16 @@ import { createDemoJobTrackApiClient } from './demoClient';
 import { emptyApplicationFilters } from '../features/applications/applicationFilters';
 
 describe('createDemoJobTrackApiClient', () => {
-  it('starts with fictitious applications and a computed dashboard summary', async () => {
+  it('starts with demo applications and a computed dashboard summary', async () => {
     const client = createDemoJobTrackApiClient();
 
     const applications = await client.listApplications(emptyApplicationFilters);
     const summary = await client.getDashboardSummary();
 
     expect(applications).toHaveLength(4);
-    expect(applications.every((application) => application.notes?.includes('Dado de exemplo'))).toBe(true);
+    expect(applications.every((application) => application.notes !== undefined)).toBe(true);
+    expect(applications.every((application) => !application.notes?.includes('Dado de exemplo'))).toBe(true);
+    expect(applications.some((application) => application.notes?.includes('Revisar retorno'))).toBe(true);
     expect(summary.total).toBe(4);
     expect(summary.statusCounts.applied).toBeGreaterThan(0);
     expect(summary.frequentStacks[0]?.stack).toBe('React');
@@ -41,7 +43,7 @@ describe('createDemoJobTrackApiClient', () => {
       status: 'interested',
       stacks: ['React', 'Node.js'],
       nextActionDate: '2026-05-12',
-      notes: 'Dado de exemplo criado durante a demo.',
+      notes: 'Confirmar detalhes da conversa técnica.',
     });
     const updated = await client.updateApplication(created.id, { status: 'interview' });
     await client.deleteApplication(updated.id);

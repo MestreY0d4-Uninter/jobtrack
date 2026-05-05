@@ -103,7 +103,11 @@ Payloads de criação e edição são validados com Zod. `DELETE` remove a candi
 
 ## Validação
 
+Para rodar a validação completa, crie o `.env` local a partir do exemplo e suba o PostgreSQL antes dos testes de integração:
+
 ```bash
+test -f .env || cp .env.example .env
+npm run db:up
 npm run db:generate
 npm run db:deploy -w apps/api
 npm run typecheck
@@ -118,3 +122,7 @@ npm run build
 - Melhorar filtros salvos e ordenação.
 - Avaliar autenticação para uso privado.
 - Avaliar visualização Kanban sem complicar o fluxo principal.
+
+## Licença
+
+MIT. Veja [LICENSE](LICENSE).

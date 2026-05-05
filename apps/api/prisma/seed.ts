@@ -32,7 +32,7 @@ async function main() {
         dateApplied: toDate('2026-05-01'),
         nextActionDate: toDate('2026-05-08'),
         stacks: ['React', 'TypeScript', 'CSS'],
-        notes: 'Dado de exemplo para demo pública.',
+        notes: 'Revisar retorno e registrar próximos passos após o contato inicial.',
       },
       {
         company: 'Remote Systems Brasil',
@@ -44,7 +44,7 @@ async function main() {
         status: 'interested',
         nextActionDate: toDate('2026-05-10'),
         stacks: ['Node.js', 'Fastify', 'PostgreSQL'],
-        notes: 'Registro de exemplo com foco em API e banco de dados.',
+        notes: 'Conferir requisitos de API, banco de dados e rotina de deploy.',
       },
       {
         company: 'Office Tech Solutions',
@@ -56,7 +56,7 @@ async function main() {
         dateApplied: toDate('2026-04-28'),
         nextActionDate: toDate('2026-05-05'),
         stacks: ['JavaScript', 'SQL'],
-        notes: 'Dado de exemplo para testar dashboard e filtros.',
+        notes: 'Preparar perguntas sobre sustentação, prioridades e fluxo da equipe.',
       },
     ],
   });

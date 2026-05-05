@@ -6,7 +6,7 @@ import type { JobApplication } from '../features/applications/application.types'
 const application: JobApplication = {
   id: '9d2a36a5-4e2b-49fb-8af1-0ef0f87cf447',
   company: 'Acme Tech',
-  role: 'Estágio Front-end',
+  role: 'Desenvolvedor Front-end',
   workMode: 'remote',
   status: 'applied',
   stacks: ['React', 'TypeScript'],
@@ -52,7 +52,7 @@ describe('createJobTrackApiClient', () => {
     const client = createJobTrackApiClient({ baseUrl: 'https://api.example.test/' });
     const result = await client.createApplication({
       company: 'Acme Tech',
-      role: 'Estágio Front-end',
+      role: 'Desenvolvedor Front-end',
       workMode: 'remote',
       status: 'applied',
       stacks: ['React', 'TypeScript'],
@@ -66,7 +66,7 @@ describe('createJobTrackApiClient', () => {
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
           company: 'Acme Tech',
-          role: 'Estágio Front-end',
+          role: 'Desenvolvedor Front-end',
           workMode: 'remote',
           status: 'applied',
           stacks: ['React', 'TypeScript'],
@@ -90,7 +90,7 @@ describe('createJobTrackApiClient', () => {
     const client = createJobTrackApiClient({ baseUrl: 'https://api.example.test' });
 
     await expect(
-      client.createApplication({ company: '', role: 'Estágio Front-end' }),
+      client.createApplication({ company: '', role: 'Desenvolvedor Front-end' }),
     ).rejects.toThrow('company: Company is required');
   });
 });

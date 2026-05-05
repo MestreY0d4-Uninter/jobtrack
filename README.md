@@ -1,51 +1,25 @@
-# JobTrack ADS
+# JobTrack
 
-Tracker de candidaturas para estudantes de ADS/TI organizarem oportunidades de estágio/júnior por status, stack, modalidade e próximas ações.
+Sistema full-stack para organizar candidaturas, acompanhar status, stack, modalidade de trabalho e próximas ações.
 
-Status: Milestones 0–6 concluídos e demo estática local disponível. A base técnica, validação de domínio, filtros, dashboard, PostgreSQL/Prisma, migration inicial, seed fictício, repository, rotas REST CRUD, front-end MVP integrado à API e modo demo com dados fictícios já estão implementados e testados.
+## Demo
 
-## Preview da demo
+Demo pública: https://mestrey0d4-uninter.github.io/jobtrack/
 
-![Preview do dashboard do JobTrack ADS](docs/assets/jobtrack-ads-demo-overview.png)
+![Preview do dashboard do JobTrack](docs/assets/jobtrack-demo-overview.png)
 
-A imagem acima mostra a demo estática com dados fictícios rodando só no navegador, sem backend nem banco. A captura full-page também está versionada em `docs/assets/jobtrack-ads-demo-dashboard.png`.
+A demo roda no navegador com dados de exemplo. Para persistência real, rode a API e o PostgreSQL localmente.
 
-## Por que este projeto existe
+## O que o sistema faz
 
-Durante a busca por estágio, é fácil perder links, datas, requisitos e status das candidaturas. O JobTrack ADS organiza a busca como um pipeline simples e mostra métricas úteis sem depender de planilhas bagunçadas.
+- Cadastro, edição, listagem e exclusão de candidaturas.
+- Status do processo: `interested`, `applied`, `interview`, `offer`, `rejected` e `archived`.
+- Filtros por status, modalidade, stack e texto.
+- Campo de próxima ação para follow-up.
+- Dashboard com total por status, próximas ações e stacks frequentes.
+- Modo demo front-only para avaliação rápida sem banco de dados.
 
-## MVP planejado
-
-- Criar, listar, editar e excluir candidaturas.
-- Atualizar status: `interested`, `applied`, `interview`, `offer`, `rejected`, `archived`.
-- Filtrar por status, modalidade, stack e texto.
-- Acompanhar próxima ação/follow-up.
-- Dashboard com contagem por status, próximas ações e stacks frequentes.
-- Seed com dados fictícios para demonstração.
-
-## Estado atual
-
-Implementado até agora:
-- API Fastify com `GET /health`.
-- Schemas Zod para entrada de candidaturas.
-- Tipos de domínio para status, modalidade e candidatura.
-- Filtros puros por status, modalidade, stack e texto.
-- Regras puras de dashboard para contagem por status, próximas ações e stacks frequentes.
-- PostgreSQL local via Docker Compose.
-- Prisma 7 com driver adapter PostgreSQL, schema, migration inicial e seed fictício.
-- Repository de candidaturas com testes de integração.
-- Rotas REST para candidaturas: `POST`, `GET`, `GET /:id`, `PATCH` e `DELETE`.
-- Rota `GET /dashboard/summary` usando as regras puras de dashboard.
-- Front React/Vite com dashboard, filtros, listagem e formulário de criação/edição integrado à API.
-- Modo demo estático (`VITE_DEMO_MODE=true`) com dados fictícios no navegador, sem exigir API/PostgreSQL.
-- Screenshot validado para README e apresentação do portfólio.
-- CI com typecheck, testes unitários, migrations, testes de integração e build.
-
-Ainda falta para publicar como projeto de portfólio:
-- Publicar a demo em uma URL estável.
-- Revisão final de README/case study antes de fixar no GitHub.
-
-## Stack planejada
+## Stack
 
 - React + TypeScript + Vite
 - Node.js + TypeScript + Fastify
@@ -54,35 +28,34 @@ Ainda falta para publicar como projeto de portfólio:
 - Vitest
 - GitHub Actions
 
-## Documentação
+## Documentação técnica
 
 - [Requisitos do produto](docs/product-requirements.md)
-- [Plano de implementação](docs/plans/jobtrack-ads-implementation-plan.md)
-- [Case study](docs/case-study.md)
+- [Plano de implementação](docs/plans/implementation-plan.md)
+- [Visão técnica](docs/case-study.md)
 - [ADR-001 — Full-stack TypeScript](docs/adrs/ADR-001-fullstack-typescript.md)
 - [ADR-002 — PostgreSQL + Prisma](docs/adrs/ADR-002-postgresql-prisma.md)
 - [ADR-003 — Estratégia de testes](docs/adrs/ADR-003-testing-strategy.md)
 - [ADR-004 — Uso responsável de IA](docs/adrs/ADR-004-ai-usage-policy.md)
 
-## Uso responsável de IA
-
-IA pode apoiar pesquisa, planejamento, revisão e geração de código, mas o código só entra no projeto depois de passar por entendimento humano, testes, typecheck, revisão de segurança básica e validação contra o escopo do MVP.
-
 ## Segurança e privacidade
 
-A demo usa apenas dados fictícios. Não insira dados pessoais ou sensíveis em ambiente público.
+A demo usa dados de exemplo. Não insira dados pessoais ou sensíveis em ambiente público.
 
-Secrets devem ficar em `.env`, nunca no repositório. O projeto mantém `.env.example` com placeholders para desenvolvimento local.
+Secrets e connection strings reais devem ficar em `.env`, nunca no repositório. O projeto mantém `.env.example` apenas com valores de desenvolvimento local.
 
-## Como rodar a demo estática
+## Como rodar a demo local
 
-Para visualizar o front com dados fictícios, sem API, PostgreSQL ou `.env` real:
+Para visualizar o front com dados de exemplo, sem API, PostgreSQL ou `.env` real:
 
 ```bash
+npm install
 VITE_DEMO_MODE=true npm run dev -w apps/web
 ```
 
-Para gerar um build estático da demo:
+Depois acesse `http://localhost:5173`.
+
+Para gerar o build estático da demo:
 
 ```bash
 VITE_DEMO_MODE=true npm run build -w apps/web
@@ -90,9 +63,7 @@ cd apps/web/dist
 python3 -m http.server 5173
 ```
 
-Depois acesse `http://localhost:5173`.
-
-## Como rodar localmente
+## Como rodar com API e banco
 
 ```bash
 npm install
@@ -103,18 +74,20 @@ npm run db:deploy -w apps/api
 npm run db:seed -w apps/api
 ```
 
-A API usa `DATABASE_URL` definida no `.env`. O banco local expõe PostgreSQL em `localhost:5433` para evitar conflito com instalações locais na porta padrão `5432`.
+A API usa `DATABASE_URL` definida no `.env`. O PostgreSQL local fica em `localhost:5433` para evitar conflito com instalações na porta padrão `5432`.
 
-Para usar o front integrado à API em desenvolvimento, rode em dois terminais:
+Em dois terminais:
 
 ```bash
 npm run dev -w apps/api
 npm run dev -w apps/web
 ```
 
-O Vite usa proxy de `/api` para `http://localhost:3333` por padrão. Se a API estiver em outro endereço, ajuste `VITE_API_BASE_URL` no `.env`. Para usar a demo estática, defina `VITE_DEMO_MODE=true`; o padrão é `false`.
+Acesse `http://localhost:5173`.
 
-## API atual
+O Vite usa proxy de `/api` para `http://localhost:3333`. Se a API estiver em outro endereço, ajuste `VITE_API_BASE_URL` no `.env`.
+
+## API
 
 Com o servidor rodando, a API expõe:
 
@@ -126,17 +99,9 @@ Com o servidor rodando, a API expõe:
 - `DELETE /applications/:id`
 - `GET /dashboard/summary?today=YYYY-MM-DD`
 
-Payloads de criação/edição são validados com Zod. `DELETE` remove a candidatura; para apenas ocultar uma candidatura, use `PATCH` alterando `status` para `archived`.
+Payloads de criação e edição são validados com Zod. `DELETE` remove a candidatura; para ocultar sem apagar, use `PATCH` alterando `status` para `archived`.
 
-## Roadmap
-
-- Publicar a demo estática em uma URL estável.
-- Revisar README/case study antes de fixar o repositório no GitHub profile.
-- Adicionar import/export CSV.
-- Avaliar autenticação para uso pessoal privado após o MVP.
-- Avaliar Kanban visual sem aumentar o escopo do MVP.
-
-## Como validar a base atual
+## Validação
 
 ```bash
 npm run db:generate
@@ -146,3 +111,10 @@ npm test
 npm run test:integration
 npm run build
 ```
+
+## Próximos passos
+
+- Adicionar importação/exportação CSV.
+- Melhorar filtros salvos e ordenação.
+- Avaliar autenticação para uso privado.
+- Avaliar visualização Kanban sem complicar o fluxo principal.

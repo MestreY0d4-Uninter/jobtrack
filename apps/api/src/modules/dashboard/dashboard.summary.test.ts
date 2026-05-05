@@ -6,7 +6,7 @@ import type { JobApplication } from '../applications/application.schema.js';
 const application = (overrides: Partial<JobApplication>): JobApplication => ({
   id: '11111111-1111-4111-8111-111111111111',
   company: 'Tech Curitiba',
-  role: 'Estágio em Desenvolvimento Web',
+  role: 'Desenvolvedor Web',
   status: 'interested',
   workMode: 'unknown',
   stacks: [],
@@ -60,7 +60,7 @@ describe('buildDashboardSummary', () => {
       {
         id: '11111111-1111-4111-8111-111111111111',
         company: 'Vaga vencida',
-        role: 'Estágio em Desenvolvimento Web',
+        role: 'Desenvolvedor Web',
         status: 'interested',
         nextActionDate: '2026-05-03',
         isOverdue: true,
@@ -68,7 +68,7 @@ describe('buildDashboardSummary', () => {
       {
         id: '22222222-2222-4222-8222-222222222222',
         company: 'Vaga próxima',
-        role: 'Estágio em Desenvolvimento Web',
+        role: 'Desenvolvedor Web',
         status: 'interested',
         nextActionDate: '2026-05-11',
         isOverdue: false,

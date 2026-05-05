@@ -6,7 +6,7 @@ describe('createApplicationSchema', () => {
   it('accepts a valid company and role with safe defaults', () => {
     const result = createApplicationSchema.safeParse({
       company: 'Tech Curitiba',
-      role: 'Estágio em Desenvolvimento Web',
+      role: 'Desenvolvedor Web',
     });
 
     expect(result.success).toBe(true);
@@ -14,7 +14,7 @@ describe('createApplicationSchema', () => {
     if (result.success) {
       expect(result.data).toMatchObject({
         company: 'Tech Curitiba',
-        role: 'Estágio em Desenvolvimento Web',
+        role: 'Desenvolvedor Web',
         status: 'interested',
         workMode: 'unknown',
         stacks: [],
@@ -25,7 +25,7 @@ describe('createApplicationSchema', () => {
   it('rejects an empty company', () => {
     const result = createApplicationSchema.safeParse({
       company: ' ',
-      role: 'Estágio em Desenvolvimento Web',
+      role: 'Desenvolvedor Web',
     });
 
     expect(result.success).toBe(false);
@@ -43,7 +43,7 @@ describe('createApplicationSchema', () => {
   it('rejects an invalid job URL', () => {
     const result = createApplicationSchema.safeParse({
       company: 'Tech Curitiba',
-      role: 'Estágio em Desenvolvimento Web',
+      role: 'Desenvolvedor Web',
       jobUrl: 'not-a-url',
     });
 
@@ -54,7 +54,7 @@ describe('createApplicationSchema', () => {
     for (const jobUrl of ['javascript:alert(1)', 'data:text/html,<h1>x</h1>', 'ftp://example.com/vaga']) {
       const result = createApplicationSchema.safeParse({
         company: 'Tech Curitiba',
-        role: 'Estágio em Desenvolvimento Web',
+        role: 'Desenvolvedor Web',
         jobUrl,
       });
 
@@ -66,7 +66,7 @@ describe('createApplicationSchema', () => {
     for (const jobUrl of ['http://example.com/vaga', 'https://example.com/vaga']) {
       const result = createApplicationSchema.safeParse({
         company: 'Tech Curitiba',
-        role: 'Estágio em Desenvolvimento Web',
+        role: 'Desenvolvedor Web',
         jobUrl,
       });
 
@@ -85,7 +85,7 @@ describe('createApplicationSchema', () => {
   it('rejects notes above 2000 characters', () => {
     const result = createApplicationSchema.safeParse({
       company: 'Tech Curitiba',
-      role: 'Estágio em Desenvolvimento Web',
+      role: 'Desenvolvedor Web',
       notes: 'a'.repeat(2001),
     });
 

@@ -9,7 +9,7 @@ import type { DashboardSummary } from './features/dashboard/dashboard.types';
 const application: JobApplication = {
   id: '9d2a36a5-4e2b-49fb-8af1-0ef0f87cf447',
   company: 'Acme Tech',
-  role: 'Estágio Front-end',
+  role: 'Desenvolvedor Front-end',
   workMode: 'remote',
   status: 'applied',
   stacks: ['React', 'TypeScript'],
@@ -55,7 +55,7 @@ describe('App', () => {
 
     expect(await screen.findByText('Acme Tech')).toBeTruthy();
     expect(screen.getByText('Total de candidaturas')).toBeTruthy();
-    expect(screen.getByText('Estágio Front-end')).toBeTruthy();
+    expect(screen.getByText('Desenvolvedor Front-end')).toBeTruthy();
     expect(api.listApplications).toHaveBeenCalled();
     expect(api.getDashboardSummary).toHaveBeenCalled();
   });

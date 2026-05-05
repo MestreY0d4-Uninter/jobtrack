@@ -18,7 +18,7 @@ const summary: DashboardSummary = {
     {
       id: '9d2a36a5-4e2b-49fb-8af1-0ef0f87cf447',
       company: 'Acme Tech',
-      role: 'Estágio Front-end',
+      role: 'Desenvolvedor Front-end',
       status: 'applied',
       nextActionDate: '2026-05-08',
       isOverdue: false,
@@ -38,7 +38,7 @@ describe('Dashboard', () => {
     expect(screen.getByText('3')).toBeTruthy();
     expect(screen.getByText('Aplicado')).toBeTruthy();
     expect(screen.getByText('Entrevista')).toBeTruthy();
-    expect(screen.getByText('Acme Tech — Estágio Front-end')).toBeTruthy();
+    expect(screen.getByText('Acme Tech — Desenvolvedor Front-end')).toBeTruthy();
     expect(screen.getByText('2026-05-08')).toBeTruthy();
     expect(screen.getByText('React')).toBeTruthy();
     expect(screen.getAllByText('2 vagas')).toHaveLength(2);

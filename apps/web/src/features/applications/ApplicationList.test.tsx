@@ -8,7 +8,7 @@ const applications: JobApplication[] = [
   {
     id: '9d2a36a5-4e2b-49fb-8af1-0ef0f87cf447',
     company: 'Acme Tech',
-    role: 'Estágio Front-end',
+    role: 'Desenvolvedor Front-end',
     workMode: 'remote',
     status: 'applied',
     stacks: ['React', 'TypeScript'],
@@ -30,7 +30,7 @@ describe('ApplicationList', () => {
     render(<ApplicationList applications={applications} onDelete={vi.fn()} onEdit={vi.fn()} />);
 
     expect(screen.getByText('Acme Tech')).toBeTruthy();
-    expect(screen.getByText('Estágio Front-end')).toBeTruthy();
+    expect(screen.getByText('Desenvolvedor Front-end')).toBeTruthy();
     expect(screen.getByText('Aplicado')).toBeTruthy();
     expect(screen.getByText('Remoto')).toBeTruthy();
     expect(screen.getByText('React')).toBeTruthy();

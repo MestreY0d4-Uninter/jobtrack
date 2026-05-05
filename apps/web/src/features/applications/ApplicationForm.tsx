@@ -155,7 +155,7 @@ export function ApplicationForm({
           <input
             autoComplete="off"
             onChange={(event) => updateField('role', event.target.value)}
-            placeholder="Ex.: Estágio Front-end"
+            placeholder="Ex.: Desenvolvedor Front-end"
             type="text"
             value={form.role}
           />

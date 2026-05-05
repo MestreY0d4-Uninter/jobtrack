@@ -5,13 +5,13 @@ Data: 2026-05-04
 
 ## Contexto
 
-A pesquisa mostrou riscos específicos de código gerado por IA: APIs alucinadas, pacotes inexistentes, dependências suspeitas, segurança fraca, testes ruins, edge cases ausentes e excesso de confiança.
+Código gerado por IA pode trazer APIs inexistentes, pacotes desnecessários, dependências suspeitas, falhas de segurança, testes fracos, edge cases ausentes e excesso de confiança.
 
-O projeto pode usar IA como apoio, mas precisa demonstrar responsabilidade técnica.
+O projeto pode usar IA como apoio, mas qualquer código ou decisão precisa passar por validação técnica antes de entrar no repositório.
 
 ## Decisão
 
-Usar IA somente como ferramenta auxiliar, com validação obrigatória antes de aceitar qualquer código ou decisão.
+Usar IA somente como ferramenta auxiliar, com revisão obrigatória antes de aceitar código, dependências ou decisões arquiteturais.
 
 ## Checklist obrigatório
 
@@ -20,23 +20,23 @@ Antes de aceitar código gerado ou alterado com IA:
 1. Entender e conseguir explicar o código.
 2. Verificar se resolve o requisito real.
 3. Verificar APIs e dependências sugeridas.
-4. Rodar testes/typecheck/build.
+4. Rodar testes, typecheck e build.
 5. Revisar segurança básica: validação, secrets, SQL, erros e output não confiável.
-6. Confirmar que testes não foram removidos/enfraquecidos.
-7. Atualizar README/ADR se a decisão afetar uso ou arquitetura.
+6. Confirmar que testes não foram removidos ou enfraquecidos.
+7. Atualizar README ou ADR se a decisão afetar uso ou arquitetura.
 
 ## Guardrails
 
 - Não instalar pacote sugerido por IA sem verificar existência, manutenção e necessidade.
 - Não usar `eval`, `exec`, shell command ou SQL cru gerado por IA.
-- Não aceitar código que não tenha teste para comportamento principal.
+- Não aceitar código sem teste para o comportamento principal.
 - Não colocar dados reais de candidatura na demo pública.
 
 ## Consequências
 
 Positivas:
-- Transforma IA em diferencial de maturidade, não risco.
-- Dá assunto bom para case study e entrevistas.
+- IA acelera pesquisa e revisão sem substituir validação.
+- O projeto mantém rastreabilidade técnica.
 
 Negativas:
 - Mais lento que aceitar sugestões diretamente.

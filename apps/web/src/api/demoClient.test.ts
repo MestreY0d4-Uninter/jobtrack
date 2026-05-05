@@ -11,7 +11,7 @@ describe('createDemoJobTrackApiClient', () => {
     const summary = await client.getDashboardSummary();
 
     expect(applications).toHaveLength(4);
-    expect(applications.every((application) => application.notes?.includes('Dado fictício'))).toBe(true);
+    expect(applications.every((application) => application.notes?.includes('Dado de exemplo'))).toBe(true);
     expect(summary.total).toBe(4);
     expect(summary.statusCounts.applied).toBeGreaterThan(0);
     expect(summary.frequentStacks[0]?.stack).toBe('React');
@@ -36,12 +36,12 @@ describe('createDemoJobTrackApiClient', () => {
 
     const created = await client.createApplication({
       company: 'Demo Labs',
-      role: 'Estágio Full-stack',
+      role: 'Desenvolvedor Full-stack',
       workMode: 'remote',
       status: 'interested',
       stacks: ['React', 'Node.js'],
       nextActionDate: '2026-05-12',
-      notes: 'Dado fictício criado durante a demo.',
+      notes: 'Dado de exemplo criado durante a demo.',
     });
     const updated = await client.updateApplication(created.id, { status: 'interview' });
     await client.deleteApplication(updated.id);

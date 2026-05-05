@@ -19,7 +19,7 @@ const fixedNow = '2026-05-04T12:00:00.000Z';
 const createApplication = (overrides: Partial<JobApplication> = {}): JobApplication => ({
   id: '00000000-0000-4000-8000-000000000001',
   company: 'Acme Brasil',
-  role: 'Estágio Backend Node.js',
+  role: 'Desenvolvedor Backend Node.js',
   workMode: 'remote',
   status: 'applied',
   stacks: ['Node.js', 'TypeScript', 'SQL'],
@@ -98,7 +98,7 @@ describe('application REST routes', () => {
       url: '/applications',
       payload: {
         company: '  Nubank  ',
-        role: 'Estágio Desenvolvimento Backend',
+        role: 'Desenvolvedor Backend',
         workMode: 'remote',
         stacks: ['Node.js', 'PostgreSQL'],
       },
@@ -108,7 +108,7 @@ describe('application REST routes', () => {
     expect(parseJson(response.body)).toMatchObject({
       id: '00000000-0000-4000-8000-000000000001',
       company: 'Nubank',
-      role: 'Estágio Desenvolvimento Backend',
+      role: 'Desenvolvedor Backend',
       workMode: 'remote',
       status: 'interested',
       stacks: ['Node.js', 'PostgreSQL'],
@@ -142,7 +142,7 @@ describe('application REST routes', () => {
       createApplication({
         id: '00000000-0000-4000-8000-000000000101',
         company: 'Acme Brasil',
-        role: 'Estágio Backend Node.js',
+        role: 'Desenvolvedor Backend Node.js',
         status: 'applied',
         workMode: 'remote',
         stacks: ['Node.js', 'PostgreSQL'],
@@ -150,7 +150,7 @@ describe('application REST routes', () => {
       createApplication({
         id: '00000000-0000-4000-8000-000000000102',
         company: 'Contoso',
-        role: 'Estágio Suporte TI',
+        role: 'Analista de Suporte TI',
         status: 'interested',
         workMode: 'onsite',
         stacks: ['Windows'],

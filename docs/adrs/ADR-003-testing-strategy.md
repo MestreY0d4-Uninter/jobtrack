@@ -5,25 +5,26 @@ Data: 2026-05-04
 
 ## Contexto
 
-O projeto deve demonstrar qualidade, não só funcionamento visual. A pesquisa reforçou Test Pyramid, self-testing code e CI como sinais fortes de engenharia.
+O projeto deve demonstrar qualidade além do funcionamento visual. Testes automatizados e CI tornam o comportamento verificável e reduzem risco de regressão.
 
 ## Decisão
 
 Adotar uma pirâmide simples:
 
-1. Muitos testes unitários para validação, filtros, status e transformações.
+1. Testes unitários para validação, filtros, status e transformações.
 2. Testes de API para endpoints críticos com `fastify.inject()`.
-3. Poucos testes de UI no MVP; foco inicial em comportamento principal e build.
-4. CI rodando typecheck, testes e build.
+3. Testes de integração do repository com PostgreSQL.
+4. Testes de UI para o fluxo principal.
+5. CI rodando typecheck, testes e build.
 
 ## Política TDD
 
-- Para regra de negócio e API: escrever teste antes da implementação.
+- Para regra de negócio e API: escrever teste antes da implementação quando o comportamento ainda não estiver coberto.
 - Verificar RED: teste falha pelo motivo esperado.
 - Implementar mínimo para GREEN.
 - Refatorar depois de verde.
 
-## Fora do MVP
+## Fora do escopo inicial
 
 - E2E com Playwright.
 - Testes visuais.
@@ -45,6 +46,6 @@ Negativas:
 ## Comandos-alvo
 
 - `npm test`
+- `npm run test:integration`
 - `npm run typecheck`
 - `npm run build`
-- `npm run lint` se lint for configurado no MVP.

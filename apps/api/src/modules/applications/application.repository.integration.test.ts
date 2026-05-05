@@ -24,14 +24,14 @@ describe('applicationRepository', () => {
   it('creates an application with domain defaults and maps database values', async () => {
     const created = await repository.create({
       company: 'Tech Curitiba',
-      role: 'Estágio em Desenvolvimento Web',
+      role: 'Desenvolvedor Web',
       nextActionDate: '2026-05-08',
       stacks: ['React', 'TypeScript'],
     });
 
     expect(created).toMatchObject({
       company: 'Tech Curitiba',
-      role: 'Estágio em Desenvolvimento Web',
+      role: 'Desenvolvedor Web',
       status: 'interested',
       workMode: 'unknown',
       nextActionDate: '2026-05-08',
@@ -47,14 +47,14 @@ describe('applicationRepository', () => {
   it('lists applications using the existing domain filters', async () => {
     await repository.create({
       company: 'React Curitiba',
-      role: 'Estágio Front-end',
+      role: 'Desenvolvedor Front-end',
       status: 'applied',
       workMode: 'hybrid',
       stacks: ['React', 'TypeScript'],
     });
     await repository.create({
       company: 'Node Remote',
-      role: 'Estágio Back-end Node.js',
+      role: 'Desenvolvedor Back-end Node.js',
       status: 'interested',
       workMode: 'remote',
       stacks: ['Node.js', 'SQL'],
@@ -73,9 +73,9 @@ describe('applicationRepository', () => {
   it('finds, updates and deletes an application by id', async () => {
     const created = await repository.create({
       company: 'Startup Remota',
-      role: 'Estágio Backend',
+      role: 'Desenvolvedor Backend',
       status: 'applied',
-      notes: 'Enviar portfólio.',
+      notes: 'Enviar projeto público.',
     });
 
     await expect(repository.findById(created.id)).resolves.toMatchObject({
@@ -111,7 +111,7 @@ describe('applicationRepository', () => {
         url: '/applications',
         payload: {
           company: 'Tech Curitiba',
-          role: 'Estágio Full-stack TypeScript',
+          role: 'Desenvolvedor Full-stack TypeScript',
           status: 'applied',
           workMode: 'hybrid',
           nextActionDate: '2026-05-08',

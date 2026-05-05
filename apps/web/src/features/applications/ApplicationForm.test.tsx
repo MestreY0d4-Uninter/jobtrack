@@ -19,7 +19,7 @@ describe('ApplicationForm', () => {
     render(<ApplicationForm onSubmit={onSubmit} />);
 
     fireEvent.change(screen.getByLabelText('Empresa'), { target: { value: ' Acme Tech ' } });
-    fireEvent.change(screen.getByLabelText('Vaga'), { target: { value: ' Estágio Front-end ' } });
+    fireEvent.change(screen.getByLabelText('Vaga'), { target: { value: ' Desenvolvedor Front-end ' } });
     fireEvent.change(screen.getByLabelText('Modalidade'), { target: { value: 'remote' } });
     fireEvent.change(screen.getByLabelText('Status'), { target: { value: 'applied' } });
     fireEvent.change(screen.getByLabelText('Stacks'), {
@@ -32,7 +32,7 @@ describe('ApplicationForm', () => {
     await waitFor(() => {
       expect(onSubmit).toHaveBeenCalledWith({
         company: 'Acme Tech',
-        role: 'Estágio Front-end',
+        role: 'Desenvolvedor Front-end',
         jobUrl: '',
         source: '',
         location: '',

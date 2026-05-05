@@ -7,7 +7,7 @@ const applications: JobApplication[] = [
   {
     id: '11111111-1111-4111-8111-111111111111',
     company: 'Tech Curitiba',
-    role: 'Estágio Front-end React',
+    role: 'Desenvolvedor Front-end React',
     status: 'applied',
     workMode: 'hybrid',
     stacks: ['React', 'TypeScript'],
@@ -17,7 +17,7 @@ const applications: JobApplication[] = [
   {
     id: '22222222-2222-4222-8222-222222222222',
     company: 'Remote Labs',
-    role: 'Estágio Back-end Node.js',
+    role: 'Desenvolvedor Back-end Node.js',
     status: 'interested',
     workMode: 'remote',
     stacks: ['Node.js', 'SQL'],

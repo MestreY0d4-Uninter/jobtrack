@@ -5,9 +5,9 @@ Data: 2026-05-04
 
 ## Contexto
 
-O objetivo do primeiro projeto de portfólio é demonstrar fundamentos úteis para vagas de estágio/júnior em Desenvolvimento/TI. A pesquisa de vagas mostrou recorrência de JavaScript/TypeScript, React, Node.js, APIs REST, Git e SQL.
+O projeto precisa demonstrar um sistema web completo, com interface, API, persistência, validação, testes e CI. JavaScript/TypeScript, React, Node.js, APIs REST, Git e SQL aparecem com frequência em vagas de desenvolvimento web.
 
-O projeto precisa ser pequeno, testável e fácil de rodar por outro dev/recrutador.
+Também é importante manter a base pequena o suficiente para ser entendida e rodada por outra pessoa.
 
 ## Decisão
 
@@ -27,8 +27,8 @@ Vantagens:
 - FastAPI é simples para APIs.
 
 Desvantagens:
-- Duas linguagens no primeiro projeto aumentam carga cognitiva.
-- Vagas coletadas citaram React/Node/TypeScript com frequência forte para web.
+- Duas linguagens aumentariam a carga de manutenção.
+- O objetivo principal do projeto é mostrar uma stack web TypeScript coesa.
 
 ### Next.js full-stack
 
@@ -36,15 +36,14 @@ Vantagens:
 - Deploy simples e ecossistema popular.
 
 Desvantagens:
-- Pode esconder a separação entre API e front para fins didáticos.
-- O projeto quer mostrar API REST separada e testes de backend claramente.
+- Poderia esconder a separação entre API e front.
+- O projeto quer deixar API REST, validação e testes de backend explícitos.
 
 ## Consequências
 
 Positivas:
-- Uma linguagem principal no front e back.
-- Stack alinhada a vagas observadas.
-- Projeto fácil de explicar no README.
+- Uma linguagem principal no front e no back.
+- Tipagem compartilhando conceitos parecidos entre camadas.
 - Boa base para testes e CI.
 
 Negativas:
@@ -53,7 +52,7 @@ Negativas:
 
 ## Guardrails
 
-- Não adicionar bibliotecas sem justificar no README ou ADR.
-- Não implementar autenticação no MVP.
-- Não usar IA para gerar código sem passar pelo checklist de revisão IA.
-- Priorizar testes para regras e API antes de UI sofisticada.
+- Não adicionar bibliotecas sem necessidade clara.
+- Não implementar autenticação na versão inicial.
+- Não aceitar código gerado por IA sem revisão, testes e validação.
+- Priorizar regras, API e fluxo principal antes de UI sofisticada.

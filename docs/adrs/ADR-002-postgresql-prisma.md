@@ -5,9 +5,7 @@ Data: 2026-05-04
 
 ## Contexto
 
-O projeto precisa demonstrar SQL/modelagem de dados, migrations e integração backend-banco. As vagas coletadas citam SQL/banco de dados como base recorrente.
-
-O domínio tem dados relacionais simples: candidaturas, status, datas, stacks e notas.
+O projeto precisa demonstrar modelagem de dados, migrations e integração entre backend e banco. O domínio tem dados relacionais simples: candidaturas, status, datas, stacks e notas.
 
 ## Decisão
 
@@ -22,8 +20,8 @@ Vantagens:
 - Bom para protótipo.
 
 Desvantagens:
-- Menos alinhado à meta de demonstrar PostgreSQL.
-- Diferenças de tipo/arrays podem atrapalhar migração para deploy.
+- Menos adequado para demonstrar PostgreSQL.
+- Diferenças de tipo e arrays podem atrapalhar uma migração posterior.
 
 ### SQL puro com node-postgres
 
@@ -32,23 +30,23 @@ Vantagens:
 - Menos camada de abstração.
 
 Desvantagens:
-- Mais boilerplate para MVP.
-- Mais chance de inconsistência em validação/migrations.
+- Mais código repetitivo para a primeira versão.
+- Mais chance de inconsistência entre validação, queries e migrations.
 
 ## Consequências
 
 Positivas:
-- Migrations documentam evolução do schema.
-- Prisma acelera CRUD e reduz boilerplate.
-- PostgreSQL é reconhecido em vagas.
+- Migrations documentam a evolução do schema.
+- Prisma acelera CRUD e reduz repetição.
+- PostgreSQL é uma escolha reconhecida para aplicações web.
 
 Negativas:
 - Exige banco local ou container.
-- Prisma adiciona ferramenta ao projeto.
+- Prisma adiciona uma ferramenta ao projeto.
 
 ## Guardrails
 
-- Manter schema pequeno no MVP.
-- Não usar features avançadas do PostgreSQL sem necessidade.
-- Documentar setup com Docker Compose para PostgreSQL.
-- Criar seed fictício para demo.
+- Manter o schema pequeno.
+- Não usar recursos avançados do PostgreSQL sem necessidade.
+- Documentar setup com Docker Compose.
+- Criar seed com dados de exemplo.

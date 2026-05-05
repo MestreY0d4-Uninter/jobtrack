@@ -101,18 +101,17 @@ export function App({ api = jobTrackApi }: AppProps) {
     <main className="app-shell">
       <header className="app-header">
         <div>
-          <p className="eyebrow">Portfólio ADS • MVP funcional</p>
-          <h1>JobTrack ADS</h1>
+          <p className="eyebrow">Pipeline de candidaturas</p>
+          <h1>JobTrack</h1>
           <p>
-            Tracker de candidaturas para organizar oportunidades de estágio e vagas júnior por status,
-            stack, modalidade e próximas ações.
+            Sistema para organizar candidaturas por status, stack, modalidade e próximas ações.
           </p>
         </div>
         <div className="header-card">
           <strong>{isDemoMode ? 'Demo estática' : 'Fluxo validado'}</strong>
           <span>
             {isDemoMode
-              ? 'Dados fictícios no navegador, sem backend'
+              ? 'Modo demo no navegador, sem backend'
               : 'React + Fastify + PostgreSQL + testes'}
           </span>
         </div>
